@@ -12,22 +12,26 @@ export default function TextFrom(props) {
     //console.log("Uppercase button click", text);
     var newText = text.toUpperCase();
     setText(newText);
+    props.showAlert("Converted to Upper Case", "success");
   };
   //Convert to lower case
   const handleLowClick = () => {
     var newText = text.toLowerCase();
     setText(newText);
+    props.showAlert("Converted to Lower Case", "success");
   };
   //Inverse Text
   const handleInverse = () => {
     const newText = text;
     const rev = Array.from(newText).reverse().join("");
     setText(rev);
+    props.showAlert("Converted to Inverse", "success");
   };
   //Handle Space
   const handleExtraSpace = () => {
     const newText = text.split(/[ ]+/);
     setText(newText.join(" "));
+    props.showAlert("Space Handled", "success");
   };
 
   //Clear Text field
@@ -35,6 +39,7 @@ export default function TextFrom(props) {
     //console.log("Uppercase button click", text);
     var newText = "";
     setText(newText);
+    props.showAlert("Text Cleared", "success");
   };
 
   return (
