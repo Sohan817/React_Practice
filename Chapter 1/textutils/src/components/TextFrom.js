@@ -18,20 +18,31 @@ export default function TextFrom(props) {
     var newText = text.toLowerCase();
     setText(newText);
   };
-  //Convert to Lower Case
+  //Inverse Text
   const handleInverse = () => {
     const newText = text;
     const rev = Array.from(newText).reverse().join("");
     setText(rev);
   };
+  //Handle Space
+  const handleExtraSpace = () => {
+    const newText = text.split(/[ ]+/);
+    setText(newText.join(" "));
+  };
+
+  //Clear Text field
   const handleClear = () => {
     //console.log("Uppercase button click", text);
     var newText = "";
     setText(newText);
   };
+
   return (
     <>
-      <div>
+      <div
+        className="container"
+        style={{ color: props.mode === "dark" ? "white" : "black" }}
+      >
         <h1>{props.heading}</h1>
         <div className="mb-3">
           <label htmlFor="myBox" className="form-label"></label>
@@ -41,7 +52,11 @@ export default function TextFrom(props) {
             id="myBox"
             onChange={handleOnChange}
             // @ts-ignore
-            rows="8"
+            rows="5"
+            style={{
+              backgroundColor: props.mode === "dark" ? "#042743" : "white",
+              color: props.mode === "dark" ? "white" : "black",
+            }}
           ></textarea>
         </div>
         <button className="btn btn-primary mx-2" onClick={handleUpClick}>
@@ -53,18 +68,24 @@ export default function TextFrom(props) {
         <button className="btn btn-primary mx-2" onClick={handleInverse}>
           Inverse Text
         </button>
+        <button className="btn btn-primary mx-2" onClick={handleExtraSpace}>
+          Handle Space
+        </button>
         <button className="btn btn-primary mx-2" onClick={handleClear}>
           Crear
         </button>
       </div>
-      <div className="container my-3">
+      <div
+        className="container my-3"
+        style={{ color: props.mode === "dark" ? "white" : "black" }}
+      >
         <h2>Your Text Summary</h2>
         <p>
           {text.split(" ").length} words, {text.length} characters
         </p>
         <p>{0.008 * text.split(" ").length} Minuts to Read the Paragraph</p>
         <h2>Preview</h2>
-        <p>{text}</p>
+        <p>{text.length > 0 ? text : "Enter Some text to priview"}</p>
       </div>
     </>
   );
