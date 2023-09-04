@@ -27,6 +27,10 @@ export default function TextFrom(props) {
     setText(rev);
     props.showAlert("Converted to Inverse", "success");
   };
+  const handleCopy = () => {
+    navigator.clipboard.writeText(text);
+    props.showAlert("Text Copied", "success");
+  };
   //Handle Space
   const handleExtraSpace = () => {
     const newText = text.split(/[ ]+/);
@@ -87,6 +91,13 @@ export default function TextFrom(props) {
         </button>
         <button
           disabled={text.length === 0}
+          className="btn btn-primary mx-1 my-1"
+          onClick={handleCopy}
+        >
+          Copy Text
+        </button>
+        <button
+          disabled={text.length === 0}
           className="btn btn-primary mx-2 my-2"
           onClick={handleExtraSpace}
         >
@@ -107,7 +118,7 @@ export default function TextFrom(props) {
         <h2>Your Text Summary</h2>
         <p>
           {
-            text.split(" ").filter((element) => {
+            text.split(/\s+/).filter((element) => {
               return element.length !== 0;
             }).length
           }{" "}

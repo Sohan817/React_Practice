@@ -20,20 +20,14 @@ function App() {
       setAlert(null);
     }, 1500);
   };
-  const removeBodyClasses = () => {
-    document.body.classList.remove("bg-light");
-    document.body.classList.remove("bg-dark");
-    document.body.classList.remove("bg-success");
-    document.body.classList.remove("bg-danger");
-    document.body.classList.remove("bg-warning");
-  };
-  const toggleMode = (cls) => {
-    removeBodyClasses();
-    document.body.classList.add("bg-" + cls);
+  const toggleMode = () => {
     if (mode === "light") {
       setMode("dark");
       document.body.style.backgroundColor = "#042743";
       showAlert("Dark mode has enabled", "success");
+      // setInterval(() => {
+      //   document.title = "Textutils";
+      // }, 2000);
     } else {
       setMode("light");
       document.body.style.backgroundColor = "white";
@@ -51,19 +45,19 @@ function App() {
           toggleMode={toggleMode}
         />
         <Alert alert={alert} />
-        <div className="container">
+        <div className="container my-3">
           <Routes>
+            <Route path="/about" element={<About mode={mode} />} />
             <Route
               path="/"
               element={
                 <TextForm
-                  heading="Text Analyser"
+                  heading="Enter The Text to Analyze Below"
                   mode={mode}
                   showAlert={showAlert}
                 />
               }
             />
-            <Route path="/about" element={<About mode={mode} />} />
           </Routes>
         </div>
       </Router>
