@@ -105,6 +105,12 @@ export default class News extends Component {
                     imageUrl={element.urlToImage}
                     // @ts-ignore
                     newsUrl={element.url}
+                    // @ts-ignore
+                    author={element.author}
+                    // @ts-ignore
+                    date={element.publishedAt}
+                    // @ts-ignore
+                    source={element.source.name}
                   />
                 </div>
               );
