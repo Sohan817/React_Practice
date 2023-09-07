@@ -20,7 +20,7 @@ export default class NewsItem extends Component {
                 : imageUrl
             }
             className="card-img-top"
-            alt="..."
+            alt="https://english.cdn.zeenews.com/sites/default/files/2023/09/03/1274061-live-score.png"
           />
           <div className="card-body">
             <h5 className="card-title">{title}</h5>
@@ -33,7 +33,7 @@ export default class NewsItem extends Component {
                   .toGMTString()}
               </small>
             </p>
-            <a href={newsUrl} className="btn btn-sm btn-primary">
+            <a href={newsUrl} className="btn btn-sm btn-dark">
               Read More
             </a>
           </div>
