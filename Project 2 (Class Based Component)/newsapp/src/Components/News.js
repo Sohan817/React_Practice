@@ -29,36 +29,24 @@ export default class News extends Component {
     };
     document.title = `NewsMonkey-${this.capitalizedFirst(this.props.category)}`;
   }
-  // updateNews = async () => {
-  //   //get url
-  //   let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=fcf7501f86ec459bb99f51f6ccb8a492&page=${this.state.page}&pageSize=${this.props.pageSize}`;
-  //   this.setState({ loading: true });
-  //   //fetch the api
-  //   let data = await fetch(url);
-  //   //Convert to json
-  //   let parseData = await data.json();
-  //   //pass data to state article
-  //   this.setState({
-  //     articles: parseData.articles,
-  //     totalArticles: parseData.totalResults,
-  //     loading: false,
-  //   });
-  // };
   componentDidMount = async () => {
+    this.props.setProgress(10);
     //get url
     let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=fcf7501f86ec459bb99f51f6ccb8a492&page=${this.state.page}&pageSize=${this.props.pageSize}`;
     this.setState({ loading: true });
     //fetch the api
     let data = await fetch(url);
+    this.props.setProgress(30);
     //Convert to json
     let parseData = await data.json();
+    this.props.setProgress(70);
     //pass data to state article
     this.setState({
       articles: parseData.articles,
       totalArticles: parseData.totalResults,
       loading: false,
     });
-    // this.updateNews();
+    this.props.setProgress(100);
   };
   // //Handle previous page
   // handlePreviousClick = async () => {
@@ -81,8 +69,6 @@ export default class News extends Component {
   //     articles: parseData.articles,
   //     loading: false,
   //   });
-  //   // this.setState({ page: this.state.page - 1 });
-  //   // this.updateNews();
   // };
   // //Handle next page
   // handleNextClick = async () => {
@@ -105,8 +91,6 @@ export default class News extends Component {
   //     articles: parseData.articles,
   //     loading: false,
   //   });
-  //   // this.setState({ page: this.state.page + 1 });
-  //   // this.updateNews();
   // };
   fetchMoreData = async () => {
     this.setState({ page: this.state.page + 1 });
@@ -136,6 +120,7 @@ export default class News extends Component {
           NewsMonkey-Top {this.capitalizedFirst(this.props.category)} Headlines
         </h1>
         {this.state.loading && <Spinner />}
+        {/* Infinite scroll */}
         <InfiniteScroll
           dataLength={this.state.articles.length}
           next={this.fetchMoreData}
