@@ -3,10 +3,10 @@ import React from "react";
 export default function Shop() {
   return (
     <>
-      <h1>Buy Addidas Shows 50 USD</h1>
+      <h2>Diposit or Withdraw Money</h2>
       <div className="container">
         <button className="btn btn-primary mx-2">-</button>
-        Add to cart
+        Update Balence
         <button className="btn btn-primary mx-2">+</button>
       </div>
     </>
